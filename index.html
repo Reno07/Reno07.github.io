@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-TeX-Beamer" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/07/TeX-Beamer/" class="article-date">
+  <time class="dt-published" datetime="2021-01-07T14:36:14.000Z" itemprop="datePublished">2021-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/07/TeX-Beamer/">TeX-Beamer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="Tex-Beamer使用"><a href="#Tex-Beamer使用" class="headerlink" title="Tex Beamer使用"></a>Tex Beamer使用</h1><h2 id="分栏"><a href="#分栏" class="headerlink" title="分栏"></a>分栏</h2><p>利用环境</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;columns&#125;</span><br><span class="line">\column&#123;0.5\textwidth&#125;</span><br><span class="line">左边栏内容</span><br><span class="line">\column&#123;0.5\textwidth&#125;</span><br><span class="line">右边栏内容</span><br><span class="line">\end&#123;\columns&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调整位置"><a href="#调整位置" class="headerlink" title="调整位置"></a>调整位置</h2><p>比如调整图像等垂直位置</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\vskip-2cm %向左移动2cm</span><br><span class="line">\vspace&#123;2cm&#125; %向右移动2cm</span><br><span class="line">% v代表垂直方向的距离</span><br><span class="line">\hskip-2cm %向上移动2cm</span><br><span class="line">\hspace&#123;2cm&#125; %向下移动2cm</span><br><span class="line">% h代表水平方向的距离</span><br></pre></td></tr></table></figure>
+<h2 id="目录页面"><a href="#目录页面" class="headerlink" title="目录页面"></a>目录页面</h2><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;frame&#125;</span><br><span class="line">  \frametitle&#123;目录&#125;</span><br><span class="line">  \tableofcontents[hideallsubsections]</span><br><span class="line">\end&#123;frame&#125;</span><br><span class="line"></span><br><span class="line">\section&#123;问题描述&#125;</span><br><span class="line">\begin&#123;frame&#125;</span><br><span class="line">    \tableofcontents[currentsection]</span><br><span class="line">    % 可替换为currentsubsection当前子节</span><br><span class="line">\end&#123;frame&#125;</span><br></pre></td></tr></table></figure>
+<p>这里可以展示目录页面及当前所在的section</p>
+<h3 id="Beamer-不显示目录"><a href="#Beamer-不显示目录" class="headerlink" title="Beamer 不显示目录"></a>Beamer 不显示目录</h3><p>参考如下代码，在<code>section</code>后加<code>*</code>号可不显示该节</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% Placing a * after \section means it will not show</span><br><span class="line">% in the outline or table of contents.</span><br><span class="line">\section*&#123;Summary&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="调整页脚宽度"><a href="#调整页脚宽度" class="headerlink" title="调整页脚宽度"></a>调整页脚宽度</h2><p>在beamer环境中会在页脚放上报告人、标题、页码等信息，默认状态下三者是一样长的，如果标题太长可以按如下方式调整</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">\defbeamertemplate&#123;footline&#125;&#123;NGEGFootlineTemplate&#125;&#123;%</span><br><span class="line">    \leavevmode %离开vmode，也就是离开竖直模式，进入水平模式</span><br><span class="line">    \hbox&#123;%</span><br><span class="line">    \begin&#123;beamercolorbox&#125;[wd&#x3D;0.2\paperwidth,ht&#x3D;2.25ex,dp&#x3D;1ex,center]&#123;author in head&#x2F;foot&#125;%</span><br><span class="line">        \ifnum \the\value&#123;page&#125;&gt;1 \usebeamerfont&#123;author in head&#x2F;foot&#125;\insertshortauthor\fi</span><br><span class="line">    \end&#123;beamercolorbox&#125;%</span><br><span class="line">    \begin&#123;beamercolorbox&#125;[wd&#x3D;0.6\paperwidth,ht&#x3D;2.25ex,dp&#x3D;1ex,center]&#123;title in head&#x2F;foot&#125;%</span><br><span class="line">        \ifnum \the\value&#123;page&#125;&gt;1 \usebeamerfont&#123;title in head&#x2F;foot&#125;\insertshorttitle\fi</span><br><span class="line">    \end&#123;beamercolorbox&#125;%</span><br><span class="line">    \begin&#123;beamercolorbox&#125;[wd&#x3D;0.2\paperwidth,ht&#x3D;2.25ex,dp&#x3D;1ex,center]&#123;author in head&#x2F;foot&#125;%</span><br><span class="line">            \ifnum \the\value&#123;page&#125;&gt;1 \insertframenumber&#123;&#125; &#x2F; \inserttotalframenumber\fi</span><br><span class="line">    \end&#123;beamercolorbox&#125;&#125;%</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调整表格大小"><a href="#调整表格大小" class="headerlink" title="调整表格大小"></a>调整表格大小</h2><p>如果表格太大或者太宽不能放进一页slide的话，可以通过如下方式处理</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;table&#125;[htbp]</span><br><span class="line">    \centering</span><br><span class="line">    \resizebox&#123;12cm&#125;&#123;3cm&#125;&#123;</span><br><span class="line">    \begin&#123;tabular&#125;</span><br><span class="line">    % Here is table</span><br><span class="line">    \end&#123;tabular&#125; &#125; %这里括号与resizebox对应</span><br><span class="line">\end&#123;table&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/07/TeX-Beamer/" data-id="ckjmyft4200001ogp7bundrxq" data-title="TeX-Beamer" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/01/07/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2021-01-07T14:31:32.190Z" itemprop="datePublished">2021-01-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2021/01/07/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/01/07/hello-world/" data-id="ckjmyft4600011ogp6lvo42u9" data-title="Hello World" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/01/07/TeX-Beamer/">TeX-Beamer</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/07/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
