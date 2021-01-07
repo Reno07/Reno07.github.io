@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MATLAB-杂记 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="MATLAB笔记不知道该怎么归类的就都放在这吧[滑稽.jpg]  全局变量与静态变量全局变量（global）：MATLAB给变量赋值之前不需要声明，但如果是想要作为全局变量，则可以先在main函数里声明为gloabl，这样后续的子函数便可调用全局变量的值。静态变量（persistent）：只有这个function才能认识它，main函数也不行，供该函数下一次调用.在函数中声明的变量，当函数调用完之">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MATLAB-杂记">
+<meta property="og:url" content="http://example.com/2019/11/03/MATLAB-%E6%9D%82%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="MATLAB笔记不知道该怎么归类的就都放在这吧[滑稽.jpg]  全局变量与静态变量全局变量（global）：MATLAB给变量赋值之前不需要声明，但如果是想要作为全局变量，则可以先在main函数里声明为gloabl，这样后续的子函数便可调用全局变量的值。静态变量（persistent）：只有这个function才能认识它，main函数也不行，供该函数下一次调用.在函数中声明的变量，当函数调用完之">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-11-03T04:35:09.000Z">
+<meta property="article:modified_time" content="2019-11-03T05:06:47.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-MATLAB-杂记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/11/03/MATLAB-%E6%9D%82%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2019-11-03T04:35:09.000Z" itemprop="datePublished">2019-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      MATLAB-杂记
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="MATLAB笔记"><a href="#MATLAB笔记" class="headerlink" title="MATLAB笔记"></a>MATLAB笔记</h1><p><del>不知道该怎么归类的就都放在这吧[滑稽.jpg]</del> </p>
+<h3 id="全局变量与静态变量"><a href="#全局变量与静态变量" class="headerlink" title="全局变量与静态变量"></a>全局变量与静态变量</h3><p>全局变量（<code>global</code>）：MATLAB给变量赋值之前不需要声明，但如果是想要作为全局变量，则可以先在main函数里声明为gloabl，这样后续的子函数便可调用全局变量的值。<br>静态变量（<code>persistent</code>）：只有这个function才能认识它，main函数也不行，供该函数下一次调用.在函数中声明的变量，当函数调用完之后就会释放。如果想保留这个变量的值（供该函数下一次调用），可以把这个变量声明为静态变量。静态变量不能在声明的时候赋值，而且只能在function里声明,且只有这个function才能认识它（main函数也不行）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2019/11/03/MATLAB-%E6%9D%82%E8%AE%B0/" data-id="ckjmz9fto00060egp5lhaaair" data-title="MATLAB-杂记" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TeX-参考文献
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/03/MATLAB-%E7%BB%98%E5%9B%BE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MATLAB-绘图</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" rel="tag">网络工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 20px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">网络工具</a> <a href="/tags/%E9%98%85%E8%AF%BB/" style="font-size: 10px;">阅读</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/">Fortran 95程序设计 阅读笔记&lt;1&gt;</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">Tecplot使用笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/">TeX-字体及相关</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/TeX-%E4%BC%AA%E4%BB%A3%E7%A0%81/">TeX-伪代码</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/TeX-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">TeX-数学公式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
