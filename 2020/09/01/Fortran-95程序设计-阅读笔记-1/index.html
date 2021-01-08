@@ -1,300 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Fortran 95程序设计 阅读笔记&lt;1&gt; | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Chapter 3 Fortran程序设计基础Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：  感叹号表示注释 每行可以编写132个字符 行号放在每行程序最前面 一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行 Fortran不区分大小写！！！  Fortran的数据类型 整型">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Fortran 95程序设计 阅读笔记&lt;1&gt;">
-<meta property="og:url" content="http://example.com/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Chapter 3 Fortran程序设计基础Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：  感叹号表示注释 每行可以编写132个字符 行号放在每行程序最前面 一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行 Fortran不区分大小写！！！  Fortran的数据类型 整型">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png">
-<meta property="og:image" content="http://example.com/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig2.png">
-<meta property="article:published_time" content="2020-09-01T14:07:34.000Z">
-<meta property="article:modified_time" content="2020-09-01T14:11:51.000Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="编程">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-Fortran-95程序设计-阅读笔记-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" class="article-date">
-  <time class="dt-published" datetime="2020-09-01T14:07:34.000Z" itemprop="datePublished">2020-09-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Fortran 95程序设计 阅读笔记&lt;1&gt;
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Chapter-3-Fortran程序设计基础"><a href="#Chapter-3-Fortran程序设计基础" class="headerlink" title="Chapter 3 Fortran程序设计基础"></a>Chapter 3 Fortran程序设计基础</h1><p>Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：</p>
-<ul>
-<li><strong>感叹号表示注释</strong></li>
-<li>每行可以编写132个字符</li>
-<li>行号放在每行程序最前面</li>
-<li><strong>一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行</strong></li>
-<li><strong>Fortran不区分大小写！！！</strong></li>
-</ul>
-<h3 id="Fortran的数据类型"><a href="#Fortran的数据类型" class="headerlink" title="Fortran的数据类型"></a>Fortran的数据类型</h3><ul>
-<li>整型 INTEGER：又分为长整型$10^9$ 量级和短整型$10^5$量级</li>
-<li>浮点数 REAL：<ul>
-<li>单精度（最大数值为$3.4<em>10^{38}$ 最小为$1.18</em>10^{-38}$）</li>
-<li>双精度（最大数值为$1.79<em>10^{308}$ 最小为$2.23</em>10^{-308}$）</li>
-</ul>
-</li>
-<li>复数 COMPLEX：表示为$a+b\mathrm{i}$的形式 其中两个数都是浮点数REAL</li>
-</ul>
-<h1 id="Chapter-4-输入输出及声明"><a href="#Chapter-4-输入输出及声明" class="headerlink" title="Chapter 4 输入输出及声明"></a>Chapter 4 输入输出及声明</h1><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p>程序的开始需要用 <code>program main</code> 其中<code>main</code>作为程序名称，完全可以自定义；程序的结束需要用 <code>end</code> 作为结尾。</p>
-<p>关于输出<br><code>write(*,*) &quot;Hello World!&quot;， “R U OK？””</code><br>其中write后接括号表示输出的参数，这里用两个星号表示采取默认的参数，其中第一个<code>*</code>表示输出位置用默认值，即为屏幕，<strong>修改该参数的话可以将结果输出到指定的文本里</strong>；第二个<code>*</code>表示不特别设置输出格式。之后跟着的双引号内的文本表示需要输出的内容。<br>还有更加严谨的写法：<code>write(UNIT=6, FMT=*) &quot;Hello World!&quot;</code></p>
-<p>输出还有一种很常用的表示方式<code>print *, &quot;Hello World!&quot;</code>这里的<code>*</code>表示输出格式为默认值，值得注意的是print只能输出到屏幕上。</p>
-<p><code>end</code>作为程序的结尾，由于封装代码，有若干种方法：</p>
-<ul>
-<li><code>end</code></li>
-<li><code>end program</code></li>
-<li><code>end program main</code> 其中main为程序名</li>
-</ul>
-<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>声明整数型变量的时候可以指定变量的长度 <code>integer(kind=4) a</code> 即表示长度为4bytes的整数类型变量，Fortran支持2bytes和1bytes的整数型变量，默认的是4bytes，在使用过程中别越界就好。同样的方法可以申明双精度的浮点数 <code>real(kind=8) a</code> 或者是 <code>real :: a</code> <strong>默认的浮点数是单精度</strong></p>
-<p>浮点数运算的过程中，必须将每一位写成浮点数，比如<br><code>a = 2.5 + 3.0/2.0</code> 这样给出的结果是浮点数的，但是如果输入 <code>a = 2.5 + 3/2</code> 则这样给出的结果为 <code>a = 3.5</code> <strong>所以特别记得在需要做浮点运算的过程中所有数值都必须为浮点数！</strong><br>如果有这么一段代码</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">integer :: a=<span class="number">1</span></span><br><span class="line">integer :: b=<span class="number">2</span></span><br><span class="line">real :: c</span><br><span class="line">c=a/b</span><br><span class="line">write(*, <span class="string">&quot;(F5.2)&quot;</span>) c</span><br></pre></td></tr></table></figure>
-<p>这样给出的结果会是<code>0.00</code> 这是因为a,b都是整型，计算除法的结果如果保留整型就是0，再把它赋值给c，继而转化为浮点数<br><em>ps：实验表明对于 <code>3.0/2.0</code> 写为 <code>3.0/2</code> 或者是 <code>3/2.0</code> 也是可以得到浮点数运算的，只要不是 <code>3/2</code> 就行</em></p>
-<p>科学计数法：在Fortran里面，单精度的浮点数表示科学计数法为<code>1E10, 1E-10</code> 分别表示$10^{10}, 10^{-10}$；但是对于双精度而言则需要换为 <code>1D10, 1D-10</code></p>
-<p>Fortran很少见的可以直接定义复数，复数的声明 <code>complex a</code> 但是复数的赋值需要同时赋予实部和虚部 <code>a=(1.0,2.0)</code> </p>
-<p>字符及字符串 CHARACTER：可以指定字符串的长度，如果赋值的长度超过指定的长度，那么只会截取前面部分的字符串。有几种修改字符串的方式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">character(<span class="built_in">len</span>=<span class="number">20</span>) string</span><br><span class="line">string = <span class="string">&quot;Good morning.&quot;</span></span><br><span class="line">string(<span class="number">6</span>:) = <span class="string">&quot;evening.&quot;</span> ! 重新设定从第<span class="number">6</span>个字符后的字符串</span><br><span class="line">string(<span class="number">1</span>:<span class="number">2</span>) = <span class="string">&quot;GO&quot;</span> ! 字符串最前面两个字符变为大写</span><br><span class="line">string(<span class="number">13</span>:<span class="number">13</span>) = <span class="string">&quot;!&quot;</span> ! 最后结尾字符为!</span><br></pre></td></tr></table></figure>
-<p>字符串的拼接可以用 <code>string1//string2</code> 表示</p>
-<p>声明并设置逻辑变量，注意赋值的时候在true和false的前后都有一个点，但是用WRITE输出的时候只会输出 T 和 F<br><code>logical a</code><br><code>a = .true.</code><br><code>a = .false.</code></p>
-<h2 id="格式化输入输出"><a href="#格式化输入输出" class="headerlink" title="格式化输入输出"></a>格式化输入输出</h2><p>输入数据可以用命令 <code>read(*,*) a</code> 进行，用法和之前的 <code>write</code> 基本一样，如果是输入多个数据的话则可以用逗号，空格以及回车键区分开</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">program ex0421</span><br><span class="line">  integer   a</span><br><span class="line">  real      b</span><br><span class="line">  <span class="built_in">complex</span>   c</span><br><span class="line">  logical   d</span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">20</span>) e</span><br><span class="line">  a=<span class="number">10</span></span><br><span class="line">  b=<span class="number">12.34</span></span><br><span class="line">  c=(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">  d=.true.</span><br><span class="line">  e=<span class="string">&quot;FORTRAN&quot;</span></span><br><span class="line">  write(*,<span class="string">&quot;(1X,I5)&quot;</span>)    a  ! 用I来格式化整数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,F5.2)&quot;</span> ) b  ! 用F来格式化浮点数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,F4.1,F4.1)&quot;</span> ) c ! <span class="built_in">complex</span>也是浮点数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,L3)&quot;</span>) d  ! 用L来输出logical</span><br><span class="line">  write(*,<span class="string">&quot;(1X,A10)&quot;</span>) e ! 用A来输出字符串</span><br><span class="line">  stop</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
-<p>输出结果为：<br><img src="Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png" alt="输出结果"><br><img src="Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig2.png" alt="格式化输入输出表格"><br>其实常用的格式比较少，这里详细描述几个常用的格式：</p>
-<ul>
-<li>【**Iw[.m]**】以w个字符的宽度输出整数，至少输出m个数字<br>如果w比输出的数字长，则在数字的前面补空格，否则是输出w个<code>*</code>号作为警告<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(I5.3)&quot;) 10</span><br><span class="line">&#39;  010&#39; ! 这里为输出示例 单引号并不会出现 前面补位两个空格 后面由于强制输出3个数字所以补位一个0</span><br></pre></td></tr></table></figure></li>
-<li>【<strong>Fw.d</strong>】以w个字符为文本框宽度输出浮点数，小数部分占d个字符宽<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(F9.3)&quot;) 123.45</span><br><span class="line">&#39;  123.450&#39; ! 这里为输出示例  前面补位两个空格 小数部分强制输出3个数字</span><br></pre></td></tr></table></figure></li>
-<li>【**Ew.d[Ee]**】以w个字符为文本框宽度输出浮点数，小数部分占d个字符宽，指数部分最少输出e个字符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(E15.7)&quot;) 123.45</span><br><span class="line">&#39;  0.1234500E+03&#39; ! 小数部位补0</span><br><span class="line">write(*,&quot;(E9.2E3)&quot;) 12.34</span><br><span class="line">&#39; 0.12E002&#39; ! 小数部分占2位指数部分占3位</span><br></pre></td></tr></table></figure></li>
-<li>【<strong>Dw.d[De]**】用法跟 【</strong>Ew.d[Ee]**】一样就是输入输出时候用D替换E</li>
-<li>【<strong>Aw</strong>】以w个字符输出字符串，不够的在前面补上空格。</li>
-<li>【<strong>nX</strong>】输出位置向右移动n位<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*, &quot;(3X, I5)&quot;) 100</span><br><span class="line">&#39;     100&#39; 前面5个空格表示右移3位 多出2个字符宽 共计5个空格</span><br></pre></td></tr></table></figure></li>
-<li>【<strong>Lw</strong>】以w个字符宽输出T或F的真假值</li>
-<li>【<strong>Gw.d[Ew]**】G可以输出所有类型，固定用w个字符宽度，d不一定用到但是</strong>不能省略！！！**</li>
-<li>【**/**】换行输出</li>
-<li>【<strong>Tc</strong>】输出位置移动到本行的第c个字节</li>
-</ul>
-<h2 id="其他需要注意的知识点"><a href="#其他需要注意的知识点" class="headerlink" title="其他需要注意的知识点"></a>其他需要注意的知识点</h2><ul>
-<li><code>implicit none</code> 增加这条命令可以有效防止未申明的变量在程序中运行，即这条命令后所有变量都必须要先申明才能用</li>
-<li>设置变量初值时候需要两个冒号</li>
-<li>常数声明 <code>parameter</code> 把一个变量声明为常数有两个好处，一个是什么为常数之后不可以再改变他的值，再一个就是被声明为常数的变量可能进入缓存从而提高运行效率<br><code>real, parameter :: pi=3.14159</code></li>
-<li>所有的声明应该放在可执行的描述之前，程序代码出现数值运算和输入输出命令时不能再做变量声明</li>
-</ul>
-<h2 id="自定义数据类型"><a href="#自定义数据类型" class="headerlink" title="自定义数据类型"></a>自定义数据类型</h2><p>这里相当于C语言里面的结构体函数，自己定义一个结构体然后给他逐一赋值，比如下面这段代码定义结构体<code>person</code>下的变量<code>a</code>要访问其中的某一个参数需要用到符号<code>%</code> 在之前的C语言中是用小数点表示该含义</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">program  ex0434</span><br><span class="line">implicit none</span><br><span class="line">! 开始建立person这个类型</span><br><span class="line"><span class="built_in">type</span> :: person </span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">30</span>) :: name ! 人名</span><br><span class="line">  integer  ::  age          ! 年龄</span><br><span class="line">  integer  ::  height       ! 身高			</span><br><span class="line">  integer  ::  weight       ! 体重</span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">80</span>) :: address ! 地址</span><br><span class="line">end <span class="built_in">type</span> person</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span>(person) :: a ! 声明一个person类型的变量</span><br><span class="line"></span><br><span class="line">write(*,*) <span class="string">&quot;NAME:&quot;</span></span><br><span class="line">read(*,*)  a%name </span><br><span class="line">write(*,*) <span class="string">&quot;AGE:&quot;</span></span><br><span class="line">read(*,*)  a%age</span><br><span class="line">write(*,*) <span class="string">&quot;HEIGHT:&quot;</span></span><br><span class="line">read(*,*)  a%height</span><br><span class="line">write(*,*) <span class="string">&quot;WEIGHT:&quot;</span></span><br><span class="line">read(*,*)  a%weight</span><br><span class="line">write(*,*) <span class="string">&quot;ADDRESS:&quot;</span></span><br><span class="line">read(*,<span class="string">&quot;(A80)&quot;</span>) a%address</span><br><span class="line"></span><br><span class="line">write(*,<span class="number">100</span>) a%name,a%age,a%height,a%weight,a%address</span><br><span class="line"><span class="number">100</span> <span class="built_in">format</span>(<span class="string">&quot;Name:&quot;</span>,A10/,<span class="string">&quot;Age:&quot;</span>,I3/,<span class="string">&quot;Height:&quot;</span>,I3/,<span class="string">&quot;Weight:&quot;</span>,I3/,&amp;</span><br><span class="line">           &amp;<span class="string">&quot;Addres:&quot;</span>,A50)</span><br><span class="line"></span><br><span class="line">stop</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" data-id="ckjmz9ftl00030egpb7o18f8d" data-title="Fortran 95程序设计 阅读笔记&lt;1&gt;" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li></ul>
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Tecplot使用笔记</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+{% block page_class %}page-post-detail{% endblock %}
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+{% block content %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" rel="tag">网络工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a></li></ul>
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
 
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 20px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">网络工具</a> <a href="/tags/%E9%98%85%E8%AF%BB/" style="font-size: 10px;">阅读</a>
-    </div>
-  </div>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/">Fortran 95程序设计 阅读笔记&lt;1&gt;</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">Tecplot使用笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/">TeX-字体及相关</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E4%BC%AA%E4%BB%A3%E7%A0%81/">TeX-伪代码</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">TeX-数学公式</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}

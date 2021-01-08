@@ -1,269 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Tecplot使用笔记 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Tecplot使用笔记数据格式Tecplot可以直接将dat文件拖进去就可以自动画出图，并作出一系列的修改加个，用起来还是蛮方便的。tecplot数据格式主要分为有序数据和无序数据（常用于有限元方法的作图），这里先介绍有序数据，等用tecplot画有限元的图的时候再来看看。可以参考tecplot的官方文档 有序数据有序数据格式要先写表头，注明有几个变量，然后第二行写i,j,k三个方向各有多少数据，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Tecplot使用笔记">
-<meta property="og:url" content="http://example.com/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Tecplot使用笔记数据格式Tecplot可以直接将dat文件拖进去就可以自动画出图，并作出一系列的修改加个，用起来还是蛮方便的。tecplot数据格式主要分为有序数据和无序数据（常用于有限元方法的作图），这里先介绍有序数据，等用tecplot画有限元的图的时候再来看看。可以参考tecplot的官方文档 有序数据有序数据格式要先写表头，注明有几个变量，然后第二行写i,j,k三个方向各有多少数据，">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/tecplot_3D.png">
-<meta property="og:image" content="http://example.com/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/tecplot_heatmap.png">
-<meta property="article:published_time" content="2020-02-28T12:39:24.000Z">
-<meta property="article:modified_time" content="2020-02-28T13:38:34.000Z">
-<meta property="article:author" content="John Doe">
-<meta property="article:tag" content="网络工具">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/tecplot_3D.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.3.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-Tecplot使用笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2020-02-28T12:39:24.000Z" itemprop="datePublished">2020-02-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      Tecplot使用笔记
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Tecplot使用笔记"><a href="#Tecplot使用笔记" class="headerlink" title="Tecplot使用笔记"></a>Tecplot使用笔记</h1><h2 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h2><p>Tecplot可以直接将dat文件拖进去就可以自动画出图，并作出一系列的修改加个，用起来还是蛮方便的。tecplot数据格式主要分为有序数据和无序数据（常用于有限元方法的作图），这里先介绍有序数据，等用tecplot画有限元的图的时候再来看看。<br>可以参考<a target="_blank" rel="noopener" href="https://www.tecplot.com/documentation/">tecplot的官方文档</a></p>
-<h3 id="有序数据"><a href="#有序数据" class="headerlink" title="有序数据"></a>有序数据</h3><p>有序数据格式要先写表头，注明有几个变量，然后第二行写i,j,k三个方向各有多少数据，最后依次写数据。一般来说数据的顺序是固定一个指标然后另外的指标变化，这样可以完成二维三维图像，写完之后保存为txt文件。<br>以下代码参考<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_78131f1f0102v268.html">博客</a></p>
-<p>数据点</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">VARIABLES &#x3D; &quot;X&quot;,&quot;Y&quot;</span><br><span class="line">ZONE I&#x3D;5, F&#x3D;POINT</span><br><span class="line">2 4</span><br><span class="line">3 9</span><br><span class="line">5 25</span><br><span class="line">6 36</span><br><span class="line">7 49</span><br></pre></td></tr></table></figure>
-<p>四边形网格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">VARIABLES &#x3D; &quot;X&quot;, &quot;Y&quot;, &quot;Intensity&quot;, &quot;Pressure&quot;</span><br><span class="line">ZONE I&#x3D;2, J&#x3D;3, F&#x3D;POINT</span><br><span class="line">3 0 0 50</span><br><span class="line">7 2 0 43</span><br><span class="line">2 4 1 42</span><br><span class="line">6 6 0 37</span><br><span class="line">1 8 1 30</span><br><span class="line">5 9 1 21</span><br></pre></td></tr></table></figure>
-<p>四边形单元</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">TITLE &#x3D; &quot;Example: 2D Finite-Element Data&quot;</span><br><span class="line">VARIABLES &#x3D; &quot;X&quot;, &quot;Y&quot;, &quot;P&quot;, &quot;T&quot;</span><br><span class="line">ZONE N&#x3D;8, E&#x3D;4, F&#x3D;FEPOINT, ET&#x3D;QUADRILATERAL</span><br><span class="line">0.0 1.0 100.0 1.6</span><br><span class="line">1.0 1.0 150.0 1.5</span><br><span class="line">3.0 1.0 300.0 2.0</span><br><span class="line">0.0 0.0 50.0 1.0</span><br><span class="line">1.0 0.0 100.0 1.4</span><br><span class="line">3.0 0.0 200.0 2.2</span><br><span class="line">4.0 0.0 400.0 3.0</span><br><span class="line">2.0 2.0 280.0 1.9</span><br><span class="line">1 2 5 4</span><br><span class="line">2 3 6 5</span><br><span class="line">6 7 3 3</span><br><span class="line">3 2 8 8</span><br></pre></td></tr></table></figure>
-<p>三角形单元</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">VARIABLES &#x3D; &quot;X&quot;, &quot;Y&quot;</span><br><span class="line">ZONE N&#x3D;5, E&#x3D;3, F&#x3D;FEPOINT, ET&#x3D;TRIANGLE</span><br><span class="line">1.0 1.0</span><br><span class="line">2.0 3.0</span><br><span class="line">2.5 1.0</span><br><span class="line">3.5 5.0</span><br><span class="line">4.0 1.0</span><br><span class="line">1 2 3</span><br><span class="line">3 2 4</span><br><span class="line">3 5 4</span><br><span class="line">ZONE N&#x3D;5, E&#x3D;3, F&#x3D;FEPOINT, ET&#x3D;TRIANGLE,D&#x3D;(1,2,FECONNECT)</span><br></pre></td></tr></table></figure>
-<p>MATLAB三维图像代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">%%将输出数据保存成了csv格式 先读csv表</span><br><span class="line">A &#x3D; csvread(&#39;PMWENOFinalInternalEnergy_33x33_2.csv&#39;);</span><br><span class="line">data_name&#x3D;&#39;PMWENOInEn2d.dat&#39;;</span><br><span class="line"></span><br><span class="line">h&#x3D;1&#x2F;32;</span><br><span class="line">x&#x3D;[h&#x2F;2:h:1-h&#x2F;2]&#39;; %X方向和Y方向均匀剖分</span><br><span class="line">y&#x3D;[h&#x2F;2:h:1-h&#x2F;2]&#39;;</span><br><span class="line">xn&#x3D;size(x,1);</span><br><span class="line">yn&#x3D;size(y,1);</span><br><span class="line">pi&#x3D;0;</span><br><span class="line">for xi&#x3D;1:xn    </span><br><span class="line">    for yi&#x3D;1:yn            </span><br><span class="line">        pi&#x3D;pi+1;            </span><br><span class="line">        press(pi,:)&#x3D;[x(xi),y(yi),A(xi+1,yi)]; % 注意这里写成三元数组对</span><br><span class="line">    end</span><br><span class="line">end</span><br><span class="line">fid&#x3D;fopen(data_name,&#39;w&#39;);</span><br><span class="line">fprintf(fid,&#39;variables&#x3D; &quot;x&quot;, &quot;y&quot;, &quot;meanpress&quot;\r\n&#39;);</span><br><span class="line">fprintf(fid,&#39;zone t&#x3D;&quot;Frame 0&quot;i&#x3D;%d,j&#x3D;%d,f&#x3D;point\r\n&#39;,yn,xn);</span><br><span class="line">fprintf(fid,&#39;%8.4f %8.4f %8.4f \r\n&#39;,press&#39;);</span><br><span class="line">fclose(fid);</span><br></pre></td></tr></table></figure>
-<p>FORTRAN代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">WRITE(*,*)&#39;ZONE DATAPACKING&#x3D;POINT,ZONETYPE&#x3D;FETRIANGLE,N&#x3D;&#39;,NNODES,&#39;,E&#x3D;&#39;,NELEM;</span><br><span class="line">DO N&#x3D;1,NNODES</span><br><span class="line">    DO VAR&#x3D;1,NUMVAR</span><br><span class="line">       WRITE(*,*) VARRAY(VAR,N)</span><br><span class="line">   ENDDO</span><br><span class="line">ENDDO</span><br><span class="line">DO M&#x3D;1,NELEM</span><br><span class="line">    DO L&#x3D;1,3</span><br><span class="line">       WRITE (*,*) NDCNCT(M,L)</span><br><span class="line">   ENDDO</span><br><span class="line">ENDDO</span><br></pre></td></tr></table></figure>
-<h2 id="Tecplot绘图"><a href="#Tecplot绘图" class="headerlink" title="Tecplot绘图"></a>Tecplot绘图</h2><p>以一个三维图像为例，输入数据为三元数组，其中X,Y方向均匀剖分，可以绘制三维的立体图像，也可以绘制2为的热力图，绘图的类型可以在左侧栏选择，多点几下鼠标基本就能得到想要的图像。这里附几个绘图过程中遇到的问题：</p>
-<ul>
-<li>默认的三维图像X,Y,Z轴比例是1:1:1的，和在编译器里面跑出来的结果不是很一致，需要选择第一行Plot的axis<strong>调整坐标轴比例</strong>。</li>
-<li>画contour图像的时候，侧边栏的热度分布可以调整，增减区间数量，增减条目都是可以实现的</li>
-</ul>
-<p>附上绘制的三维图像和热力图：<br><img src="Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/tecplot_3D.png" alt="3维图像示例"><br><img src="Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/tecplot_heatmap.png" alt="热力图示例"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" data-id="ckjmz9ftx000t0egp05je0r7r" data-title="Tecplot使用笔记" class="article-share-link">Share</a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" rel="tag">网络工具</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Fortran 95程序设计 阅读笔记&lt;1&gt;
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">TeX-字体及相关</div>
-    </a>
-  
-</nav>
-
-  
-</article>
+{% extends '_layout.swig' %}
+{% import '_macro/post.swig' as post_template %}
+{% import '_macro/sidebar.swig' as sidebar_template %}
 
 
-</section>
-        
-          <aside id="sidebar">
-  
-    
+{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" rel="tag">网络工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%98%85%E8%AF%BB/" rel="tag">阅读</a></li></ul>
+{% block page_class %}page-post-detail{% endblock %}
+
+
+{% block content %}
+
+  <div id="posts" class="posts-expand">
+    {{ post_template.render(page) }}
+
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.baidushare %}
+        {% include '_partials/share/baidushare.swig' %}
+      {% elseif theme.add_this_id %}
+        {% include '_partials/share/add-this.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
     </div>
   </div>
 
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 20px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/" style="font-size: 15px;">网络工具</a> <a href="/tags/%E9%98%85%E8%AF%BB/" style="font-size: 10px;">阅读</a>
-    </div>
-  </div>
+{% block sidebar %}
+  {{ sidebar_template.render(true) }}
+{% endblock %}
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/02/">February 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/">Fortran 95程序设计 阅读笔记&lt;1&gt;</a>
-          </li>
-        
-          <li>
-            <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">Tecplot使用笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/">TeX-字体及相关</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E4%BC%AA%E4%BB%A3%E7%A0%81/">TeX-伪代码</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/03/TeX-%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">TeX-数学公式</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+{% block script_extra %}
+  {% include '_scripts/pages/post-details.swig' %}
+{% endblock %}
