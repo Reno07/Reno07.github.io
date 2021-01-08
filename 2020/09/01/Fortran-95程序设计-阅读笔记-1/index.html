@@ -1,37 +1,790 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
 
-{% block page_class %}page-post-detail{% endblock %}
+  
 
 
-{% block content %}
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Chapter 3 Fortran程序设计基础Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：  感叹号表示注释 每行可以编写132个字符 行号放在每行程序最前面 一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行 Fortran不区分大小写！！！  Fortran的数据类型 整型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fortran 95程序设计 阅读笔记&lt;1&gt;">
+<meta property="og:url" content="http://reno07.github.io/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/index.html">
+<meta property="og:site_name" content="Reno的个人博客">
+<meta property="og:description" content="Chapter 3 Fortran程序设计基础Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：  感叹号表示注释 每行可以编写132个字符 行号放在每行程序最前面 一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行 Fortran不区分大小写！！！  Fortran的数据类型 整型">
+<meta property="og:locale">
+<meta property="og:image" content="http://reno07.github.io/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png">
+<meta property="og:image" content="http://reno07.github.io/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig2.png">
+<meta property="article:published_time" content="2020-09-01T14:07:34.000Z">
+<meta property="article:modified_time" content="2020-09-01T14:11:51.000Z">
+<meta property="article:author" content="Reno Lei">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://reno07.github.io/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://reno07.github.io/2020/09/01/Fortran-95程序设计-阅读笔记-1/"/>
+
+
+
+
+
+  <title>Fortran 95程序设计 阅读笔记<1> | Reno的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reno的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hexo初试</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/%20" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            something
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://reno07.github.io/2020/09/01/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reno的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Fortran 95程序设计 阅读笔记<1></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-01T22:07:34+08:00">
+                2020-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Chapter-3-Fortran程序设计基础"><a href="#Chapter-3-Fortran程序设计基础" class="headerlink" title="Chapter 3 Fortran程序设计基础"></a>Chapter 3 Fortran程序设计基础</h1><p>Fortran 代码分为固定格式fixed format和自由格式free format，前者基本已经被淘汰。后者在使用的时候需要注意：</p>
+<ul>
+<li><strong>感叹号表示注释</strong></li>
+<li>每行可以编写132个字符</li>
+<li>行号放在每行程序最前面</li>
+<li><strong>一行程序的最后如果是 &amp; 或者第一个字符是 &amp; 则表示接着上一行</strong></li>
+<li><strong>Fortran不区分大小写！！！</strong></li>
+</ul>
+<h3 id="Fortran的数据类型"><a href="#Fortran的数据类型" class="headerlink" title="Fortran的数据类型"></a>Fortran的数据类型</h3><ul>
+<li>整型 INTEGER：又分为长整型$10^9$ 量级和短整型$10^5$量级</li>
+<li>浮点数 REAL：<ul>
+<li>单精度（最大数值为$3.4<em>10^{38}$ 最小为$1.18</em>10^{-38}$）</li>
+<li>双精度（最大数值为$1.79<em>10^{308}$ 最小为$2.23</em>10^{-308}$）</li>
+</ul>
+</li>
+<li>复数 COMPLEX：表示为$a+b\mathrm{i}$的形式 其中两个数都是浮点数REAL</li>
+</ul>
+<h1 id="Chapter-4-输入输出及声明"><a href="#Chapter-4-输入输出及声明" class="headerlink" title="Chapter 4 输入输出及声明"></a>Chapter 4 输入输出及声明</h1><h2 id="输入输出"><a href="#输入输出" class="headerlink" title="输入输出"></a>输入输出</h2><p>程序的开始需要用 <code>program main</code> 其中<code>main</code>作为程序名称，完全可以自定义；程序的结束需要用 <code>end</code> 作为结尾。</p>
+<p>关于输出<br><code>write(*,*) &quot;Hello World!&quot;， “R U OK？””</code><br>其中write后接括号表示输出的参数，这里用两个星号表示采取默认的参数，其中第一个<code>*</code>表示输出位置用默认值，即为屏幕，<strong>修改该参数的话可以将结果输出到指定的文本里</strong>；第二个<code>*</code>表示不特别设置输出格式。之后跟着的双引号内的文本表示需要输出的内容。<br>还有更加严谨的写法：<code>write(UNIT=6, FMT=*) &quot;Hello World!&quot;</code></p>
+<p>输出还有一种很常用的表示方式<code>print *, &quot;Hello World!&quot;</code>这里的<code>*</code>表示输出格式为默认值，值得注意的是print只能输出到屏幕上。</p>
+<p><code>end</code>作为程序的结尾，由于封装代码，有若干种方法：</p>
+<ul>
+<li><code>end</code></li>
+<li><code>end program</code></li>
+<li><code>end program main</code> 其中main为程序名</li>
+</ul>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>声明整数型变量的时候可以指定变量的长度 <code>integer(kind=4) a</code> 即表示长度为4bytes的整数类型变量，Fortran支持2bytes和1bytes的整数型变量，默认的是4bytes，在使用过程中别越界就好。同样的方法可以申明双精度的浮点数 <code>real(kind=8) a</code> 或者是 <code>real :: a</code> <strong>默认的浮点数是单精度</strong></p>
+<p>浮点数运算的过程中，必须将每一位写成浮点数，比如<br><code>a = 2.5 + 3.0/2.0</code> 这样给出的结果是浮点数的，但是如果输入 <code>a = 2.5 + 3/2</code> 则这样给出的结果为 <code>a = 3.5</code> <strong>所以特别记得在需要做浮点运算的过程中所有数值都必须为浮点数！</strong><br>如果有这么一段代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">integer :: a=<span class="number">1</span></span><br><span class="line">integer :: b=<span class="number">2</span></span><br><span class="line">real :: c</span><br><span class="line">c=a/b</span><br><span class="line">write(*, <span class="string">&quot;(F5.2)&quot;</span>) c</span><br></pre></td></tr></table></figure>
+<p>这样给出的结果会是<code>0.00</code> 这是因为a,b都是整型，计算除法的结果如果保留整型就是0，再把它赋值给c，继而转化为浮点数<br><em>ps：实验表明对于 <code>3.0/2.0</code> 写为 <code>3.0/2</code> 或者是 <code>3/2.0</code> 也是可以得到浮点数运算的，只要不是 <code>3/2</code> 就行</em></p>
+<p>科学计数法：在Fortran里面，单精度的浮点数表示科学计数法为<code>1E10, 1E-10</code> 分别表示$10^{10}, 10^{-10}$；但是对于双精度而言则需要换为 <code>1D10, 1D-10</code></p>
+<p>Fortran很少见的可以直接定义复数，复数的声明 <code>complex a</code> 但是复数的赋值需要同时赋予实部和虚部 <code>a=(1.0,2.0)</code> </p>
+<p>字符及字符串 CHARACTER：可以指定字符串的长度，如果赋值的长度超过指定的长度，那么只会截取前面部分的字符串。有几种修改字符串的方式：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">character(<span class="built_in">len</span>=<span class="number">20</span>) string</span><br><span class="line">string = <span class="string">&quot;Good morning.&quot;</span></span><br><span class="line">string(<span class="number">6</span>:) = <span class="string">&quot;evening.&quot;</span> ! 重新设定从第<span class="number">6</span>个字符后的字符串</span><br><span class="line">string(<span class="number">1</span>:<span class="number">2</span>) = <span class="string">&quot;GO&quot;</span> ! 字符串最前面两个字符变为大写</span><br><span class="line">string(<span class="number">13</span>:<span class="number">13</span>) = <span class="string">&quot;!&quot;</span> ! 最后结尾字符为!</span><br></pre></td></tr></table></figure>
+<p>字符串的拼接可以用 <code>string1//string2</code> 表示</p>
+<p>声明并设置逻辑变量，注意赋值的时候在true和false的前后都有一个点，但是用WRITE输出的时候只会输出 T 和 F<br><code>logical a</code><br><code>a = .true.</code><br><code>a = .false.</code></p>
+<h2 id="格式化输入输出"><a href="#格式化输入输出" class="headerlink" title="格式化输入输出"></a>格式化输入输出</h2><p>输入数据可以用命令 <code>read(*,*) a</code> 进行，用法和之前的 <code>write</code> 基本一样，如果是输入多个数据的话则可以用逗号，空格以及回车键区分开</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">program ex0421</span><br><span class="line">  integer   a</span><br><span class="line">  real      b</span><br><span class="line">  <span class="built_in">complex</span>   c</span><br><span class="line">  logical   d</span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">20</span>) e</span><br><span class="line">  a=<span class="number">10</span></span><br><span class="line">  b=<span class="number">12.34</span></span><br><span class="line">  c=(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line">  d=.true.</span><br><span class="line">  e=<span class="string">&quot;FORTRAN&quot;</span></span><br><span class="line">  write(*,<span class="string">&quot;(1X,I5)&quot;</span>)    a  ! 用I来格式化整数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,F5.2)&quot;</span> ) b  ! 用F来格式化浮点数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,F4.1,F4.1)&quot;</span> ) c ! <span class="built_in">complex</span>也是浮点数</span><br><span class="line">  write(*,<span class="string">&quot;(1X,L3)&quot;</span>) d  ! 用L来输出logical</span><br><span class="line">  write(*,<span class="string">&quot;(1X,A10)&quot;</span>) e ! 用A来输出字符串</span><br><span class="line">  stop</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>输出结果为：<br><img src="Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig1.png" alt="输出结果"><br><img src="Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-1/fig2.png" alt="格式化输入输出表格"><br>其实常用的格式比较少，这里详细描述几个常用的格式：</p>
+<ul>
+<li>【**Iw[.m]**】以w个字符的宽度输出整数，至少输出m个数字<br>如果w比输出的数字长，则在数字的前面补空格，否则是输出w个<code>*</code>号作为警告<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(I5.3)&quot;) 10</span><br><span class="line">&#39;  010&#39; ! 这里为输出示例 单引号并不会出现 前面补位两个空格 后面由于强制输出3个数字所以补位一个0</span><br></pre></td></tr></table></figure></li>
+<li>【<strong>Fw.d</strong>】以w个字符为文本框宽度输出浮点数，小数部分占d个字符宽<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(F9.3)&quot;) 123.45</span><br><span class="line">&#39;  123.450&#39; ! 这里为输出示例  前面补位两个空格 小数部分强制输出3个数字</span><br></pre></td></tr></table></figure></li>
+<li>【**Ew.d[Ee]**】以w个字符为文本框宽度输出浮点数，小数部分占d个字符宽，指数部分最少输出e个字符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">write(*,&quot;(E15.7)&quot;) 123.45</span><br><span class="line">&#39;  0.1234500E+03&#39; ! 小数部位补0</span><br><span class="line">write(*,&quot;(E9.2E3)&quot;) 12.34</span><br><span class="line">&#39; 0.12E002&#39; ! 小数部分占2位指数部分占3位</span><br></pre></td></tr></table></figure></li>
+<li>【<strong>Dw.d[De]**】用法跟 【</strong>Ew.d[Ee]**】一样就是输入输出时候用D替换E</li>
+<li>【<strong>Aw</strong>】以w个字符输出字符串，不够的在前面补上空格。</li>
+<li>【<strong>nX</strong>】输出位置向右移动n位<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">write(*, &quot;(3X, I5)&quot;) 100</span><br><span class="line">&#39;     100&#39; 前面5个空格表示右移3位 多出2个字符宽 共计5个空格</span><br></pre></td></tr></table></figure></li>
+<li>【<strong>Lw</strong>】以w个字符宽输出T或F的真假值</li>
+<li>【<strong>Gw.d[Ew]**】G可以输出所有类型，固定用w个字符宽度，d不一定用到但是</strong>不能省略！！！**</li>
+<li>【**/**】换行输出</li>
+<li>【<strong>Tc</strong>】输出位置移动到本行的第c个字节</li>
+</ul>
+<h2 id="其他需要注意的知识点"><a href="#其他需要注意的知识点" class="headerlink" title="其他需要注意的知识点"></a>其他需要注意的知识点</h2><ul>
+<li><code>implicit none</code> 增加这条命令可以有效防止未申明的变量在程序中运行，即这条命令后所有变量都必须要先申明才能用</li>
+<li>设置变量初值时候需要两个冒号</li>
+<li>常数声明 <code>parameter</code> 把一个变量声明为常数有两个好处，一个是什么为常数之后不可以再改变他的值，再一个就是被声明为常数的变量可能进入缓存从而提高运行效率<br><code>real, parameter :: pi=3.14159</code></li>
+<li>所有的声明应该放在可执行的描述之前，程序代码出现数值运算和输入输出命令时不能再做变量声明</li>
+</ul>
+<h2 id="自定义数据类型"><a href="#自定义数据类型" class="headerlink" title="自定义数据类型"></a>自定义数据类型</h2><p>这里相当于C语言里面的结构体函数，自己定义一个结构体然后给他逐一赋值，比如下面这段代码定义结构体<code>person</code>下的变量<code>a</code>要访问其中的某一个参数需要用到符号<code>%</code> 在之前的C语言中是用小数点表示该含义</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">program  ex0434</span><br><span class="line">implicit none</span><br><span class="line">! 开始建立person这个类型</span><br><span class="line"><span class="built_in">type</span> :: person </span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">30</span>) :: name ! 人名</span><br><span class="line">  integer  ::  age          ! 年龄</span><br><span class="line">  integer  ::  height       ! 身高			</span><br><span class="line">  integer  ::  weight       ! 体重</span><br><span class="line">  character(<span class="built_in">len</span>=<span class="number">80</span>) :: address ! 地址</span><br><span class="line">end <span class="built_in">type</span> person</span><br><span class="line"></span><br><span class="line"><span class="built_in">type</span>(person) :: a ! 声明一个person类型的变量</span><br><span class="line"></span><br><span class="line">write(*,*) <span class="string">&quot;NAME:&quot;</span></span><br><span class="line">read(*,*)  a%name </span><br><span class="line">write(*,*) <span class="string">&quot;AGE:&quot;</span></span><br><span class="line">read(*,*)  a%age</span><br><span class="line">write(*,*) <span class="string">&quot;HEIGHT:&quot;</span></span><br><span class="line">read(*,*)  a%height</span><br><span class="line">write(*,*) <span class="string">&quot;WEIGHT:&quot;</span></span><br><span class="line">read(*,*)  a%weight</span><br><span class="line">write(*,*) <span class="string">&quot;ADDRESS:&quot;</span></span><br><span class="line">read(*,<span class="string">&quot;(A80)&quot;</span>) a%address</span><br><span class="line"></span><br><span class="line">write(*,<span class="number">100</span>) a%name,a%age,a%height,a%weight,a%address</span><br><span class="line"><span class="number">100</span> <span class="built_in">format</span>(<span class="string">&quot;Name:&quot;</span>,A10/,<span class="string">&quot;Age:&quot;</span>,I3/,<span class="string">&quot;Height:&quot;</span>,I3/,<span class="string">&quot;Weight:&quot;</span>,I3/,&amp;</span><br><span class="line">           &amp;<span class="string">&quot;Addres:&quot;</span>,A50)</span><br><span class="line"></span><br><span class="line">stop</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/28/Tecplot%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/" rel="next" title="Tecplot使用笔记">
+                <i class="fa fa-chevron-left"></i> Tecplot使用笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
 
     <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+      
     </div>
   </div>
 
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+          </div>
+          
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%20%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-Fortran%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3 Fortran程序设计基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Fortran%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.1.</span> <span class="nav-text">Fortran的数据类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%8F%8A%E5%A3%B0%E6%98%8E"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4 输入输出及声明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.1.</span> <span class="nav-text">输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E"><span class="nav-number">2.2.</span> <span class="nav-text">声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA"><span class="nav-number">2.3.</span> <span class="nav-text">格式化输入输出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">2.4.</span> <span class="nav-text">其他需要注意的知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.5.</span> <span class="nav-text">自定义数据类型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reno Lei</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
