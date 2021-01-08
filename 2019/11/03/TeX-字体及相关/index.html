@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="Reno的个人博客">
 <meta property="og:description" content="TeX-字体及相关修改字体颜色在修改论文过程中，往往需要对亟待斟酌的语句标记，这时可以给他们加上不一样的颜色。在LaTeX中，仅需加一个头文件\usepackage&amp;#123;xcolor&amp;#125;并在需要标记的语句加上\textcolor&amp;#123;red&amp;#125;&amp;#123;示例语句&amp;#125;其中第一个大括号中的“red”表示颜色，可以修改。 修改字体大小、字形据说中文没有真正的斜体，都">
 <meta property="og:locale">
-<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png">
-<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/typeface.jpg">
+<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png">
+<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/typeface.jpg">
 <meta property="article:published_time" content="2019-11-03T05:04:28.000Z">
 <meta property="article:modified_time" content="2019-11-03T05:05:52.000Z">
 <meta property="article:author" content="Reno Lei">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png">
+<meta name="twitter:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png">
 
 
 
@@ -353,10 +353,10 @@
       
 
       
-        <h1 id="TeX-字体及相关"><a href="#TeX-字体及相关" class="headerlink" title="TeX-字体及相关"></a>TeX-字体及相关</h1><h2 id="修改字体颜色"><a href="#修改字体颜色" class="headerlink" title="修改字体颜色"></a>修改字体颜色</h2><p>在修改论文过程中，往往需要对亟待斟酌的语句标记，这时可以给他们加上不一样的颜色。在LaTeX中，仅需加一个头文件<code>\usepackage&#123;xcolor&#125;</code>并在需要标记的语句加上<code>\textcolor&#123;red&#125;&#123;示例语句&#125;</code>其中第一个大括号中的“red”表示颜色，可以修改。<br><img src="TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png" alt="色调表"></p>
+        <h1 id="TeX-字体及相关"><a href="#TeX-字体及相关" class="headerlink" title="TeX-字体及相关"></a>TeX-字体及相关</h1><h2 id="修改字体颜色"><a href="#修改字体颜色" class="headerlink" title="修改字体颜色"></a>修改字体颜色</h2><p>在修改论文过程中，往往需要对亟待斟酌的语句标记，这时可以给他们加上不一样的颜色。在LaTeX中，仅需加一个头文件<code>\usepackage&#123;xcolor&#125;</code>并在需要标记的语句加上<code>\textcolor&#123;red&#125;&#123;示例语句&#125;</code>其中第一个大括号中的“red”表示颜色，可以修改。<br><img src="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/color.png" alt="色调表"></p>
 <h2 id="修改字体大小、字形"><a href="#修改字体大小、字形" class="headerlink" title="修改字体大小、字形"></a>修改字体大小、字形</h2><p>据说中文没有真正的斜体，都是属于伪斜体，不过没什么关系，能够区分得开就行。下图是几个比较常用的字体、字形，可以根据图例选择需要的格式。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">\emph&#123;啊啊啊&#125;</span><br><span class="line">\bfseries&#123;啊啊啊&#125;</span><br><span class="line">\pmb&#123;啊啊啊&#125;</span><br><span class="line">\textbf&#123;啊啊啊&#125;</span><br><span class="line">\upshape&#123;abcdefg&#125; %直立字体</span><br><span class="line">\itshape&#123;abcdefg&#125; %意大利斜体</span><br><span class="line">\slshape&#123;abcdefg&#125; %slanted斜体</span><br></pre></td></tr></table></figure>
-<p><img src="TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/typeface.jpg" alt="字体"></p>
+<p><img src="/2019/11/03/TeX-%E5%AD%97%E4%BD%93%E5%8F%8A%E7%9B%B8%E5%85%B3/typeface.jpg" alt="字体"></p>
 
       
     </div>

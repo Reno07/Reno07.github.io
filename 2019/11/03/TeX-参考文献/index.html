@@ -86,14 +86,14 @@
 <meta property="og:site_name" content="Reno的个人博客">
 <meta property="og:description" content="TeX-参考文献参考文献写参考文献最重要的是格式，对于学术期刊，用的最多的是以下格式。  回避题名、刊名中的大小写，除首字母及特殊用法外一律改为小写 对于外文名，除最后的姓氏外，名字缩写并加“.”123序号 作者. 题名. 刊名，出版年份，卷号(期号)：起页-止页[1] 高景德，王祥珩．交流电机的多回路理论[J]．清华大学学报，1987，27(1)：1-8[2] S. Chen, S. A. Bi">
 <meta property="og:locale">
-<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg">
-<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/ref_example.png">
+<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg">
+<meta property="og:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/ref_example.png">
 <meta property="article:published_time" content="2019-11-03T04:39:16.000Z">
 <meta property="article:modified_time" content="2020-02-28T13:33:35.000Z">
 <meta property="article:author" content="Reno Lei">
 <meta property="article:tag" content="编程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg">
+<meta name="twitter:image" content="http://reno07.github.io/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg">
 
 
 
@@ -358,10 +358,10 @@
 <li>回避题名、刊名中的大小写，除首字母及特殊用法外一律改为小写</li>
 <li>对于外文名，除最后的姓氏外，名字缩写并加“.”<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">序号 作者. 题名. 刊名，出版年份，卷号(期号)：起页-止页</span><br><span class="line">[1] 高景德，王祥珩．交流电机的多回路理论[J]．清华大学学报，1987，27(1)：1-8</span><br><span class="line">[2] S. Chen, S. A. Billing, C. F. Cowan, et al. Practical identification of MARMAX models. Int J Control, 1990, 52 (6): 1327-1350</span><br></pre></td></tr></table></figure>
 在LaTeX中，需要对文献进行索引，同样按照给定标签的方式，这时需要在文末参考文献页写上：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\begin&#123;thebibliography&#125;&#123;&#125;</span><br><span class="line">\bibitem&#123;1&#125;</span><br><span class="line">XXXXX参考文献XXXXX</span><br><span class="line">\end&#123;thebibliography&#125;</span><br></pre></td></tr></table></figure>
-并在需要的地方加上<code>\cite&#123;1&#125;</code>表示引用标签为“1”的文献。<br>附表：<br><img src="TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg" alt="参考文献规范"></li>
+并在需要的地方加上<code>\cite&#123;1&#125;</code>表示引用标签为“1”的文献。<br>附表：<br><img src="/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/reference.jpg" alt="参考文献规范"></li>
 </ul>
 <h2 id="一个参考文献样例"><a href="#一个参考文献样例" class="headerlink" title="一个参考文献样例"></a>一个参考文献样例</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\bibitem&#123;Zhu2018&#125;</span><br><span class="line">J. Zhu, C.-W. Shu, </span><br><span class="line">&#123;\em A new type of multi-resolution WENO schemes with increasingly higher order of accuracy&#125;, </span><br><span class="line">Journal of Computations Physics, 375 (2018), 659-683.</span><br></pre></td></tr></table></figure>
-<p><img src="TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/ref_example.png" alt="参考文献案例"><br>注意：</p>
+<p><img src="/2019/11/03/TeX-%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE/ref_example.png" alt="参考文献案例"><br>注意：</p>
 <ol>
 <li>作者除姓之外其余名字缩写，作者之间用逗号隔开</li>
 <li>文章的题目是用斜体，即latex记号’\em’</li>
