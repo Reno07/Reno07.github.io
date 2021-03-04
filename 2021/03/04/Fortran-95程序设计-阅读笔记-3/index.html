@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Chapter 8 函数子程序 SUBROUTINE把经常需要用到的程序封装成为一个子程序，通过 call 进行调用 call sub1(para1, para2) 1234subroutine sub1()  ......  returnend subroutine sub1 ! 这里的sub1作为子函数名也可以省去 其中最后一行一般是 return 指返回到先前调用子程序的位置，不写的话算作默">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fortran-95程序设计-阅读笔记-3">
+<meta property="og:url" content="http://reno07.github.io/2021/03/04/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-3/index.html">
+<meta property="og:site_name" content="Reno的个人博客">
+<meta property="og:description" content="Chapter 8 函数子程序 SUBROUTINE把经常需要用到的程序封装成为一个子程序，通过 call 进行调用 call sub1(para1, para2) 1234subroutine sub1()  ......  returnend subroutine sub1 ! 这里的sub1作为子函数名也可以省去 其中最后一行一般是 return 指返回到先前调用子程序的位置，不写的话算作默">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-03-04T14:17:37.000Z">
+<meta property="article:modified_time" content="2021-03-04T14:19:08.592Z">
+<meta property="article:author" content="Reno Lei">
+<meta property="article:tag" content="编程">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://reno07.github.io/2021/03/04/Fortran-95程序设计-阅读笔记-3/"/>
+
+
+
+
+
+  <title>Fortran-95程序设计-阅读笔记-3 | Reno的个人博客</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Reno的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Hexo初试</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            日程表
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://reno07.github.io/2021/03/04/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/blog-logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Reno的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Fortran-95程序设计-阅读笔记-3</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-03-04T22:17:37+08:00">
+                2021-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Chapter-8-函数"><a href="#Chapter-8-函数" class="headerlink" title="Chapter 8 函数"></a>Chapter 8 函数</h1><h2 id="子程序-SUBROUTINE"><a href="#子程序-SUBROUTINE" class="headerlink" title="子程序 SUBROUTINE"></a>子程序 SUBROUTINE</h2><p>把经常需要用到的程序封装成为一个子程序，通过 <code>call</code> 进行调用 <code>call sub1(para1, para2)</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subroutine sub1()</span><br><span class="line">  ......</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">end subroutine sub1 ! 这里的sub1作为子函数名也可以省去</span><br></pre></td></tr></table></figure>
+<p>其中最后一行一般是 <code>return</code> 指返回到先前调用子程序的位置，不写的话算作默认添加，当然<code>return</code>也可以放在任何地方。其次，关于子程序的<strong>变量</strong>和<strong>行代码</strong>是与主程序相互独立的，利用行代码进行跳转的时候主程序只会跳转到主程序里相应行代码的位置，子程序亦然。</p>
+<p>子程序传参用的是<strong>传址调用</strong>，传递出去的参数和接受的参数用的是同一个地址，在子程序中修改变量也会修改主程序的值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">subroutine add(first,second)</span><br><span class="line">implicit none</span><br><span class="line">integer :: first, second</span><br><span class="line">! 用来接受参数的变量还是要声明类型，变量的初值就等于传递进来的数值</span><br></pre></td></tr></table></figure>
+<h2 id="自定义函数FUNCTION"><a href="#自定义函数FUNCTION" class="headerlink" title="自定义函数FUNCTION"></a>自定义函数FUNCTION</h2><p>自定义函数的用法与子程序基本一致，但有几点不一样：</p>
+<ul>
+<li>调用自定义函数前要先声明</li>
+<li>自定义函数执行后仅返回一个数值</li>
+<li>不再需要用 <code>call</code> 来调用，可以直接调用并赋值<br>参考一段示例代码：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">program ex0807</span><br><span class="line">implicit none</span><br><span class="line">  real :: a=<span class="number">1</span></span><br><span class="line">  real :: b=<span class="number">2</span></span><br><span class="line">  real, external :: add</span><br><span class="line">  write(*,*) add(a,b)</span><br><span class="line">  stop</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">function add(a,b)</span><br><span class="line">implicit none</span><br><span class="line">  real :: a,b ! 传入的参数</span><br><span class="line">  real :: add </span><br><span class="line">  ! add跟函数名称一样，这边不是用来声明变量，</span><br><span class="line">  ! 是声明这个函数会返回的数值类型</span><br><span class="line">  add = a+b</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+特别注意在主程序中需要用<code>external</code>声明，然后在函数里面<code>real :: add</code> 表示返回值是real类型</li>
+</ul>
+<h2 id="全局变量-COMMON"><a href="#全局变量-COMMON" class="headerlink" title="全局变量 COMMON"></a>全局变量 COMMON</h2><p>全局变量只是定义了一块共享内存空间，取全局变量的时候是根据声明时候相对位置关系来做对应，而非用变量名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">program main</span><br><span class="line">integer a,b,c,d,e,f</span><br><span class="line">common a,b,c,d,e,f</span><br><span class="line">  ......</span><br><span class="line">end program main</span><br><span class="line"></span><br><span class="line">subroutine sub()</span><br><span class="line">integer n1,n2,n3,n4,n5,n6</span><br><span class="line">common n1,n2,n3,n4,n5,n6</span><br><span class="line">  ......</span><br><span class="line">end subroutine sub</span><br></pre></td></tr></table></figure>
+<p>假如子程序仅用到第六个共享变量也必须要全部声明出来才行（<strong>STUPID！</strong>），为此给出一种对变量归类的方法简化：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">integer :: a,b</span><br><span class="line">common /group1/ a ! 将a放在group1这个区间</span><br><span class="line">common /group2/ b ! 将b放在group2这个区间</span><br><span class="line"></span><br><span class="line">! 调用时候</span><br><span class="line">integer num1, num2</span><br><span class="line">common /group1/ num1</span><br><span class="line">common /group2/ num2</span><br></pre></td></tr></table></figure>
+<p>还有一种设置共享变量的方法就是用 <code>BLOCK DATA</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">program ex0812</span><br><span class="line">implicit none</span><br><span class="line">  integer :: a,b</span><br><span class="line">  common a,b          ! a,b放在不具名的全局变量空间中</span><br><span class="line">  integer :: c,d</span><br><span class="line">  common /group1/ c,d ! c,d放在group1的全局变量空间中</span><br><span class="line">  integer :: e,f</span><br><span class="line">  common /group2/ e,f ! e,f放在group2的全局变量空间中</span><br><span class="line"></span><br><span class="line">  write(*,<span class="string">&quot;(6I4)&quot;</span>) a,b,c,d,e,f</span><br><span class="line"></span><br><span class="line">  stop</span><br><span class="line">end</span><br><span class="line"></span><br><span class="line">block data</span><br><span class="line">implicit none</span><br><span class="line">  integer a,b</span><br><span class="line">  common  a,b          ! a,b放在不具名的全局变量空间中</span><br><span class="line">  data    a,b /<span class="number">1</span>,<span class="number">2</span>/    ! 设定a,b的初值</span><br><span class="line">  integer c,d</span><br><span class="line">  common  /group1/ c,d ! c,d放在group1的全局变量空间中</span><br><span class="line">  data    c,d /<span class="number">3</span>,<span class="number">4</span>/    ! 设定c,d的初值</span><br><span class="line">  integer e,f</span><br><span class="line">  common  /group2/ e,f ! e,f放在group2的全局变量空间中</span><br><span class="line">  data    e,f /<span class="number">5</span>,<span class="number">6</span>/    ! 设定e,f的初值</span><br><span class="line">end block data</span><br></pre></td></tr></table></figure>
+<p><code>BLOCK DATA</code> 这一段程序很像子程序，可以独立运行，甚至在编译过程中是先于主程序运行的，不需要别人的调用即可执行，不过他的功能只在于设置共享变量的初值，不能有执行命令。还有就是，全局变量不能声明为常量，即不能有<code>PARAMETER</code>出现。<br>最后还要强调的是，<strong>声明全局变量的时候不要改变他的数据类型</strong>，否则很容易出错。</p>
+<h2 id="函数中的变量"><a href="#函数中的变量" class="headerlink" title="函数中的变量"></a>函数中的变量</h2><p>传递参数给函数时候最重要的是类型一定要正确，因为Fortran是传递变量的内存地址，不同数据类型在解读内存内容方法上会不一样。<strong>函数所接收的参数都是已经配置好内存空间的。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">! 比如这里有一个数组 a</span><br><span class="line">call Show(a)    ! 输入a第<span class="number">1</span>个元素内存地址</span><br><span class="line">call Show(a(<span class="number">2</span>)) ! 输入a第<span class="number">2</span>个元素内存地址</span><br></pre></td></tr></table></figure>
+<p>在实际应用过程中，传递数组参数时候比较灵活，重要的还是程序员自己判断是否超过数组范围，传递后的数组可以灵活的更改数组维度、坐标范围。多维数组在传递的时候，只有最后一维数组可以不赋值，其他维度都必须赋值。这是因为在取用数组元素的时候，会根据坐标计算元素内存的所在位置，在计算过程中一般是不涉及最后一维的。比如假设数组声明为A(L,M,N)，对于元素A(x,y,z)所在的位置就是1+(x-1)+(y-1)L+(z-1)LM。</p>
+<p>一般传递的参数变量生存周期是随着子程序或者函数的结束而结束，但是如果需要继续保存数据的话可以用命令 <code>SAVE</code>，比如下面这个计算调用多少次子程序的操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">subroutine sub()</span><br><span class="line">  implicit none</span><br><span class="line">  integer :: count = <span class="number">1</span></span><br><span class="line">  save count</span><br><span class="line">  count = count + <span class="number">1</span></span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">end subroutine sub</span><br></pre></td></tr></table></figure>
+<p><strong>特别注意的是，在这里变量<code>count</code> 的初始化只进行一次（因为已经被save下来了），再次进入该子程序的时候并不会再进行初始化！！！</strong></p>
+<p>如果需要将函数作为参数传递的话，需要特别用<code>external, intrinsic</code>声明一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">real, external :: func ! 声明func是自定义函数</span><br><span class="line">real, intrinsic :: sin ! 声明sin是库函数</span><br><span class="line">call ExecFunc(func)</span><br><span class="line">call ExecFunc(sin)</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">subroutine ExecFunc(f)</span><br><span class="line">  real, external :: f ! 声明参数f是个函数</span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">end subroutine ExecFunc</span><br></pre></td></tr></table></figure>
+<h2 id="特殊参数的使用方法"><a href="#特殊参数的使用方法" class="headerlink" title="特殊参数的使用方法"></a>特殊参数的使用方法</h2><p>由于在传递参数的时候是传递地址，参数<code>intent</code>可以确保该参数是不可以改变的：<br><code>integer, intent(in) :: a ! 指定a不可修改 只读参数</code><br><code>integer, intent(out) :: b ! 指定b可重新设置数值</code></p>
+<p><code>INTREFACE</code>是一段程序模块，用于说清楚要调用的函数类型及返回值类型，在以下情况写这样的使用接口是必要的</p>
+<ul>
+<li>函数返回值为数组</li>
+<li>指定参数位置来传递参数</li>
+<li>所调用的函数参数数目不固定</li>
+<li>输入指标参数</li>
+<li>函数返回值为指针<br>举个函数接口的例子：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Interface</span><br><span class="line">  function func</span><br><span class="line">    implicit none</span><br><span class="line">    real ......    ! 仅能说明参数或传回值类型</span><br><span class="line">    integer ......</span><br><span class="line">  end function func</span><br><span class="line">  subroutine sub</span><br><span class="line">      implicite none</span><br><span class="line">      integer ......</span><br><span class="line">  end subroutine sub</span><br><span class="line">end interface</span><br></pre></td></tr></table></figure>
+如果某个参数是不确定是否一定会传递的，即需要用到不定个数的参数传递，这时候可以声明时调用参数<code>optional</code>说明该参数是可选项，另外可调用参数 <code>present</code> 确定该参数是否传递过来，返回bool类型。如果多个参数传递，需要确保每一个参数仅传给对应的变量，可以作特别指定：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">integer, optional :: a,b,c,d,e,f</span><br><span class="line">call sub(b=<span class="number">3</span>,f=<span class="number">5</span>)    ! 仅给参数b f传递值</span><br></pre></td></tr></table></figure>
+<h2 id="特殊的函数类型"><a href="#特殊的函数类型" class="headerlink" title="特殊的函数类型"></a>特殊的函数类型</h2>在Fortran函数，需要递归使用的函数必须加上关键词<code>recursive</code><br><code>recursive integer function fact(n) result(ans)</code><br>最后的<code>result(ans)</code>是用来在程序代码中用另一个名字设置函数传回值，这里用ans来代替原来的fact，使用：<code>ans = n*fact(n-1)</code><br>内部函数可以作为某个函数的归属，仅在这个函数内调用<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">program main</span><br><span class="line">  ......</span><br><span class="line">  contains    ! contains后声明的函数仅在里面使用</span><br><span class="line">    subroutine localsub</span><br><span class="line">      ......</span><br><span class="line">    end subroutine localsub</span><br><span class="line">    function localfunc</span><br><span class="line">      ......</span><br><span class="line">    end function localfunc</span><br><span class="line">end program</span><br></pre></td></tr></table></figure>
+<h2 id="MODULE"><a href="#MODULE" class="headerlink" title="MODULE"></a>MODULE</h2><code>MODULE</code> 一般用于把有相关功能的函数及变量封装在一起，比如可以把全局变量封装在一起，然后调用这个module即可：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">moudle <span class="keyword">global</span></span><br><span class="line">  implicit none</span><br><span class="line">  integer a,b</span><br><span class="line">  common a,b</span><br><span class="line">end module</span><br><span class="line"></span><br><span class="line">program main</span><br><span class="line">  use <span class="keyword">global</span>    ! a b变量已经声明过不用再声明</span><br><span class="line">  a=<span class="number">1</span></span><br><span class="line">  b=<span class="number">2</span></span><br><span class="line">  ......</span><br><span class="line">end program</span><br></pre></td></tr></table></figure>
+一般声明为module后的变量如果不是去全局变量的话只是在使用函数内的局部变量，如果需要传递参数则需要加上关键词<code>SAVE</code> 这样效果很全局变量差不多<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">moudle <span class="keyword">global</span></span><br><span class="line">  implicit none</span><br><span class="line">  integer,save :: a,b</span><br><span class="line">end module</span><br></pre></td></tr></table></figure>
+<code>module</code> 还能用于存放自定义类型的数据以及函数<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">module module_name</span><br><span class="line">  ......</span><br><span class="line">contains</span><br><span class="line">  subroutine sub</span><br><span class="line">    .......</span><br><span class="line">  end subroutine sub</span><br><span class="line">  function func</span><br><span class="line">    ......</span><br><span class="line">  end function func</span><br><span class="line">end module</span><br></pre></td></tr></table></figure>
+一般在编写大型程序的时候都需要对程序做模块化处理，把特定功能的函数放在一个模块里，一个模块里有个好处就是变量是公用的，调用起来比较方便，且一个模块内的函数相互调用也不用经过声明。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">module constant</span><br><span class="line">  implicit none</span><br><span class="line">  real, parameter :: PI = <span class="number">3.14159</span></span><br><span class="line">  real, parameter :: G  = <span class="number">9.81</span></span><br><span class="line">end module</span><br><span class="line"></span><br><span class="line">module typedef</span><br><span class="line">  implicit none</span><br><span class="line">  <span class="built_in">type</span> player</span><br><span class="line">    real :: angle</span><br><span class="line">    real :: speed</span><br><span class="line">    real :: distance</span><br><span class="line">  end <span class="built_in">type</span></span><br><span class="line">end module</span><br><span class="line"></span><br><span class="line">module shoot</span><br><span class="line">  use constant</span><br><span class="line">  use typedef</span><br><span class="line">  implicit none</span><br><span class="line">contains</span><br><span class="line">    ! 由角度、切线速度来计算投射距离</span><br><span class="line">    subroutine Get_Distance( person )</span><br><span class="line">      implicit none</span><br><span class="line">      <span class="built_in">type</span>(player) :: person</span><br><span class="line">      real rad, Vx, time</span><br><span class="line"></span><br><span class="line">      rad  = Angle_TO_Rad( person%angle )      ! 单位转换</span><br><span class="line">      Vx   = person%speed * cos(rad)           ! 水平方向速度</span><br><span class="line">      time = <span class="number">2.0</span> * person%speed * sin(rad) / G ! 在空中飞行时间</span><br><span class="line">      person%distance = Vx * time              ! 距离 = 水平方向速度 * 飞行时间</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    end subroutine</span><br><span class="line"></span><br><span class="line">    ! 把<span class="number">0</span>～<span class="number">360</span>的角度转换成<span class="number">0</span>～2PI的弧度</span><br><span class="line">    real function Angle_TO_Rad( angle )</span><br><span class="line">      implicit none</span><br><span class="line">      real angle</span><br><span class="line">      Angle_TO_Rad = angle*pi/<span class="number">180.0</span></span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">    end function</span><br><span class="line"></span><br><span class="line">end module</span><br><span class="line"></span><br><span class="line">program ex0837</span><br><span class="line">  use shoot</span><br><span class="line">  implicit none</span><br><span class="line">  integer, parameter :: players = <span class="number">5</span></span><br><span class="line">  <span class="built_in">type</span>(player) :: people(players) = (/ player(<span class="number">30.0</span>, <span class="number">25.0</span>, <span class="number">0.0</span>),&amp;</span><br><span class="line">                                       player(<span class="number">45.0</span>, <span class="number">20.0</span>, <span class="number">0.0</span>),&amp; </span><br><span class="line">                                       player(<span class="number">35.0</span>, <span class="number">21.0</span>, <span class="number">0.0</span>),&amp;</span><br><span class="line">                                       player(<span class="number">50.0</span>, <span class="number">27.0</span>, <span class="number">0.0</span>),&amp;</span><br><span class="line">                                       player(<span class="number">40.0</span>, <span class="number">22.0</span>, <span class="number">0.0</span>) &amp;</span><br><span class="line">                                     /)</span><br><span class="line">  integer :: I</span><br><span class="line"></span><br><span class="line">  do I=<span class="number">1</span>, players</span><br><span class="line">     call Get_Distance( people(I) )</span><br><span class="line">     write(*,<span class="string">&quot;(&#x27;Player &#x27;,I1,&#x27; =&#x27;,F8.2)&quot;</span>) I, people(I)%distance</span><br><span class="line">  end do</span><br><span class="line"></span><br><span class="line">  stop</span><br><span class="line">end</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="其他的功能"><a href="#其他的功能" class="headerlink" title="其他的功能"></a>其他的功能</h2><code>entry</code> 能创建一个新的函数入口，调用入口时候会跳过进入点之前的程序。<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">program ex0838</span><br><span class="line">  implicit none</span><br><span class="line"></span><br><span class="line">  call sub()</span><br><span class="line">  call mid()</span><br><span class="line"></span><br><span class="line">  stop</span><br><span class="line">end </span><br><span class="line"></span><br><span class="line">subroutine sub()</span><br><span class="line">  implicit none</span><br><span class="line"></span><br><span class="line">  write(*,*) <span class="string">&quot;Hello.&quot;</span></span><br><span class="line">  entry mid()</span><br><span class="line">  write(*,*) <span class="string">&quot;Good morning.&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span></span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+运行结果是：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello.</span><br><span class="line">Good morning.</span><br><span class="line">Good morning.</span><br></pre></td></tr></table></figure>
+第一次调用函数sub正常运行，出现两行输出；第二次调用mid则仅有后面那一行输出。</li>
+</ul>
+<p>如果需要调用其他文件里面的内容（变量或者函数）可以用关键词  <code>include</code>来引入新的文件，使用的位置比较随意，在编译的时候会在此处展开。<br><code>include &#39;ex0840.f90&#39;</code><br>但其实这种方法并不很推荐，因为这样的速度还是很慢，还是相当于加载所有的文件</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag"># 编程</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/03/04/Fortran%E7%BC%96%E8%AF%91%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" rel="next" title="Fortran编译注意事项">
+                <i class="fa fa-chevron-left"></i> Fortran编译注意事项
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/04/Fortran-95%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0-2/" rel="prev" title="Fortran-95程序设计-阅读笔记-2">
+                Fortran-95程序设计-阅读笔记-2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/blog-logo.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/%7C%7C%20archive">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8-%E5%87%BD%E6%95%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 8 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%A8%8B%E5%BA%8F-SUBROUTINE"><span class="nav-number">1.1.</span> <span class="nav-text">子程序 SUBROUTINE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0FUNCTION"><span class="nav-number">1.2.</span> <span class="nav-text">自定义函数FUNCTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%8F%98%E9%87%8F-COMMON"><span class="nav-number">1.3.</span> <span class="nav-text">全局变量 COMMON</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E4%B8%AD%E7%9A%84%E5%8F%98%E9%87%8F"><span class="nav-number">1.4.</span> <span class="nav-text">函数中的变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E5%8F%82%E6%95%B0%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.5.</span> <span class="nav-text">特殊参数的使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E5%87%BD%E6%95%B0%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">特殊的函数类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MODULE"><span class="nav-number">1.7.</span> <span class="nav-text">MODULE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">1.8.</span> <span class="nav-text">其他的功能</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Reno Lei</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
